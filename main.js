@@ -15,5 +15,5 @@ this._shadowRoot.appendChild(template.content.cloneNode(true))
 this._root = this._shadowRoot.getElementById('root')
 }
 }
-customElements.define('com-sap-sac-exercise-gs01-main', Main)
+customElements.define('com-sap-sac-exercise-mgs01-main', Main)
 })()
