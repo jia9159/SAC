@@ -4,7 +4,7 @@ template.innerHTML = `
 <style>
 </style>
 <div id="root" style="width: 100%; height: 100%;">
-Hello WebComponent
+Hello WebComponent~!!!!
 </div>
 `
 class Main extends HTMLElement {
