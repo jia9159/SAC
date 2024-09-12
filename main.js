@@ -9,12 +9,12 @@ Hello WebComponent~!!!!
 `
 class Main extends HTMLElement {
 constructor () {
-super()
-this._shadowRoot = this.attachShadow({ mode: 'open' })
-this._shadowRoot.appendChild(template.content.cloneNode(true))
-this._root = this._shadowRoot.getElementById('root')
- 
+  super()
+  this._shadowRoot = this.attachShadow({ mode: 'open' })
+  this._shadowRoot.appendChild(template.content.cloneNode(true))
+  this._root = this._shadowRoot.getElementById('root')
 }  
+  onCustom
  onCustomWidgetResize (width, height){
   this.render()
  }
@@ -29,7 +29,7 @@ this._root = this._shadowRoot.getElementById('root')
  }
 
  render (){
-  this._root.textContent = 'Hello Custom Widget clientWidth: ${this.clientWidth}, clientHeight: ${this.clientHeight}'
+  this._root.textContent = `Hello Custom Widget clientWidth: ${this.clientWidth}, clientHeight: ${this.clientHeight}`
  }
 
 }
