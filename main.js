@@ -14,7 +14,7 @@ constructor () {
   this._shadowRoot.appendChild(template.content.cloneNode(true))
   this._root = this._shadowRoot.getElementById('root')
 }  
-  onCustom
+ 
  onCustomWidgetResize (width, height){
   this.render()
  }
@@ -23,15 +23,20 @@ constructor () {
  }
 
  onCustomWidgetAfterUpdate (){
+	 this.render()
  }
 
  onCustomWidgetDestroy (){
  }
 
- render (){
-  this._root.textContent = `Hello Custom Widget clientWidth: ${this.clientWidth}, clientHeight: ${this.clientHeight}`
+ async render (){
+  //this._root.textContent = `Hello Custom Widget clientWidth: ${this.clientWidth}, clientHeight: ${this.clientHeight}`
+  const dataBinding = this.dataBinding
+  if(!dataBinding || dataBinding.state !== 'success'){
+    return
+  }
+  this._root.textContent = JSON.stringify(dataBinding)
  }
-
 }
 customElements.define('com-sap-sac-exercise-mgs01-main', Main)
 })()
