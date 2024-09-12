@@ -1,12 +1,34 @@
+
+var getScriptPromisify = (src) =>{
+  return new Promise((resolve) => {
+	s.getScript(src, resolve)
+  })
+}
+
+var parseMetadata = metadata =>{
+  const { dimensions: dimensionsMap, mainStructurMembers: measuresMap } = metadata
+  const dimentions = []
+  for( const key in dimentionsMap) {
+     const dimension = dimensionsMap[key]
+	 dimensions.push({key, ...dimension })
+  }
+  const measures = []
+  for(const key in measuresMap){
+	const measure = measuresMap[key]
+	measures.push({ key, ...measure })
+  }
+	return { dimensions, measures, dimensionsMAp , measuresMap }
+}
+	
 (function () {
-const template = document.createElement('template')
-template.innerHTML = `
-<style>
-</style>
-<div id="root" style="width: 100%; height: 100%;">
-Hello WebComponent~!!!!
-</div>
-`
+	
+  const template = document.createElement('template')
+  template.innerHTML = `
+        <style>
+        </style>
+        <div id="root" style="width: 100%; height: 100%;">
+        </div>
+      `
 class Main extends HTMLElement {
 constructor () {
   super()
@@ -29,27 +51,6 @@ constructor () {
 
  onCustomWidgetDestroy (){
  }
-
-var getScriptPromisify = (src) =>{
-  return new Promise((resolve) => {
-	s.getScript(src, resolve)
-  })
-}
-
-var parseMetadata = metadata =>{
-  const { dimensions: dimensionsMap, mainStructurMembers: measuresMap } = metadata
-  const dimentions = []
-  for( const key in dimentionsMap) {
-     const dimension = dimensionsMap[key]
-	 dimensions.push({key, ...dimension })
-  }
-  const measures = []
-  for(const key in measuresMap){
-	const measure = measuresMap[key]
-	measures.push({ key, ...measure })
-  }
-	return { dimensions, measures, dimensionsMAp , measuresMap }
-}
 
  async render (){
   //this._root.textContent = `Hello Custom Widget clientWidth: ${this.clientWidth}, clientHeight: ${this.clientHeight}`
