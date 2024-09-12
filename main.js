@@ -56,7 +56,7 @@ var parseMetadata = metadata => {
       const dataBinding = this.dataBinding
       if (!dataBinding || dataBinding.state !== 'success') { return }
 
-      await getScriptPromisify('https://cdn.staticfile.org/echarts/5.0.0/echarts.min.js')
+      await getScriptPromisify('https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js')
 
       const { data, metadata } = dataBinding
       const { dimensions, measures } = parseMetadata(metadata)
