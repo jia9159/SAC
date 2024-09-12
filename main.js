@@ -47,21 +47,27 @@ var parseMetadata = metadata => {
       this.render()
     }
 
-
     onCustomWidgetDestroy () {
+      if (this._eChart && echarts) { echarts.dispose(this._eChart) }
+    }
 
-  }
+    setSeriesType (seriesType) {
+      this.seriesType = seriesType
+      this.dispatchEvent(new CustomEvent('propertiesChanged', { detail: { properties: { seriesType } } }))
+      this.render()
+    }
 
     async render () {
       const dataBinding = this.dataBinding
       if (!dataBinding || dataBinding.state !== 'success') { return }
 
-      await getScriptPromisify('https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js')
+      await getScriptPromisify('https://cdn.staticfile.org/echarts/5.0.0/echarts.min.js')
 
       const { data, metadata } = dataBinding
       const { dimensions, measures } = parseMetadata(metadata)
       // dimension
       const categoryData = []
+
       // measures
       const series = measures.map(measure => {
         return {
@@ -69,10 +75,11 @@ var parseMetadata = metadata => {
           name: measure.label,
           data: [],
           key: measure.key,
-          type: 'line',
+          type: this.seriesType || 'line',
           smooth: true
         }
       })
+
       data.forEach(row => {
         categoryData.push(dimensions.map(dimension => {
           return row[dimension.key].label
